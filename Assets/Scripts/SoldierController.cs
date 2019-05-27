@@ -7,11 +7,22 @@ public class SoldierController : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    private Transform head;
+
+    [SerializeField]
+    private Transform legs;
+
+    private Animator legsAnimator;
+
+
     private Transform t;
 
+    #region Unity Methods
     private void Awake()
     {
         t = transform;
+        legsAnimator = legs.GetComponent<Animator>();
     }
     // Start is called before the first frame update
     void Start()
@@ -25,8 +36,42 @@ public class SoldierController : MonoBehaviour
         
     }
 
+    #endregion
+
+    #region public methods
     public void Move(Vector2 dir)
     {
-        t.Translate(dir * speed * Time.deltaTime);
+        if (dir != Vector2.zero)
+        {
+            if (dir.sqrMagnitude > 1)
+                dir.Normalize();
+            t.Translate(dir * speed * Time.deltaTime);
+            RotateLegs(dir);
+            legsAnimator.SetBool("isWalking", true);
+        }
+        else
+        {
+            legsAnimator.SetBool("isWalking", false);
+        }
     }
+
+    public void RotateAimTowards(Vector2 target)
+    {
+        Vector2 vectorToTarget = target - (Vector2)t.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+        head.rotation = Quaternion.AngleAxis(angle, t.forward);
+    }
+
+    #endregion
+
+    #region private methods
+
+    private void RotateLegs(Vector2 dir)
+    {
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+        legs.rotation = Quaternion.AngleAxis(angle, t.forward);
+    }
+        
+    #endregion
+
 }
