@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4213434601810138489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3264359750331095510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37a8d31e946f4d4d9af3a08bb9abf83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myController: {fileID: 4992503324895162624}
+  playerID: 0
+--- !u!1001 &4392713150862954725
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1277712447340202291, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_Name
+      value: RedSoldierPlayerControlled
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917474808319958746, guid: 42eae2b98b76ecd42b8df623de514453,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 550935502059403422, guid: 42eae2b98b76ecd42b8df623de514453, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 42eae2b98b76ecd42b8df623de514453, type: 3}
+--- !u!1 &3264359750331095510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1277712447340202291, guid: 42eae2b98b76ecd42b8df623de514453,
+    type: 3}
+  m_PrefabInstance: {fileID: 4392713150862954725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4992503324895162624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8772697634613404133, guid: 42eae2b98b76ecd42b8df623de514453,
+    type: 3}
+  m_PrefabInstance: {fileID: 4392713150862954725}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3264359750331095510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95b0bd5af0fff54db465e3359c9d380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

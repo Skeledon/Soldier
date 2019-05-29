@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5643857408474355384}
   - component: {fileID: 8346156530492467591}
-  - component: {fileID: 4745083107589887341}
+  - component: {fileID: 993100661864476924}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -49,7 +49,7 @@ MonoBehaviour:
   speed: 2
   head: {fileID: 7324883072381049730}
   legs: {fileID: 7754756719698586605}
---- !u!114 &4745083107589887341
+--- !u!114 &993100661864476924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,11 +58,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2005856183802069329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e37a8d31e946f4d4d9af3a08bb9abf83, type: 3}
+  m_Script: {fileID: 11500000, guid: de0670cf3de04b74c9ad8ea4fbf2d9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myController: {fileID: 8346156530492467591}
-  playerID: 0
 --- !u!1 &3545094744603441693
 GameObject:
   m_ObjectHideFlags: 0
