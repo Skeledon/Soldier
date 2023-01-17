@@ -9,9 +9,10 @@ public class Shot : MonoBehaviour
     [SerializeField]
     private float LifeTime;
 
-    private GameObject myPool;
+    private ShotsPool myPool;
     private Transform t;
     private float currentTime;
+    private GameObject owner;
 
     private void Awake()
     {
@@ -21,15 +22,16 @@ public class Shot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        t.Translate(t.up * Speed * Time.deltaTime);
+        t.Translate(t.up * Speed * Time.deltaTime, Space.World);
         currentTime += Time.deltaTime;
         if (currentTime >= LifeTime)
             DestroySelf();
     }
 
-    public void Init()
+    public void Init(GameObject own, ShotsPool myPool)
     {
-        
+        owner = own;
+        this.myPool = myPool;
     }
 
     private void DestroySelf()

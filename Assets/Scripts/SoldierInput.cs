@@ -35,5 +35,9 @@ public class SoldierInput : MonoBehaviour
     {
         myController.Move(new Vector2(myPlayer.GetAxis("MoveHorizontal"), myPlayer.GetAxis("MoveVertical")));
         myController.RotateAimTowards(mainCam.ScreenToWorldPoint(Input.mousePosition));
+        if(myPlayer.GetButton("Fire"))
+        {
+            myController.Shoot();
+        }
     }
 }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ecc01d2f39e6c742ba39fb95c81e90d, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  Name: Pistol
+  MagazineSize: 10
+  MaxBullets: 50
+  StartingBullets: 20
+  ReloadTime: 2
+  FireRate: 1
+  ShotPrefab: {fileID: 6642286391463492555, guid: 50b5a943cfa8e344c979ff6013231bea,
+    type: 3}
+  WeaponSlot: 0

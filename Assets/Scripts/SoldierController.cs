@@ -13,16 +13,22 @@ public class SoldierController : MonoBehaviour
     [SerializeField]
     private Transform legs;
 
+    [SerializeField]
+    private WeaponManager weaponManager;
+
     private Animator legsAnimator;
 
 
     private Transform t;
+
+
 
     #region Unity Methods
     private void Awake()
     {
         t = transform;
         legsAnimator = legs.GetComponent<Animator>();
+        Spawn();
     }
     // Start is called before the first frame update
     void Start()
@@ -62,6 +68,15 @@ public class SoldierController : MonoBehaviour
         head.rotation = Quaternion.AngleAxis(angle, t.forward);
     }
 
+    public void Shoot()
+    {
+        weaponManager.Shoot(head.position, head.rotation, gameObject);
+    }
+
+    public void Spawn()
+    {
+        weaponManager.WeaponCollected(0);
+    }
     #endregion
 
     #region private methods
