@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Soldier
+  - Wall
+  - ShotPool
   layers:
   - Default
   - TransparentFX
@@ -43,4 +46,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 438346875
+    locked: 0
+  - name: UI
+    uniqueID: 2091030221
     locked: 0

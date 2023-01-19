@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ecc01d2f39e6c742ba39fb95c81e90d, type: 3}
-  m_Name: Pistol
+  m_Name: AR
   m_EditorClassIdentifier: 
   Name: Pistol
-  MagazineSize: 10
-  MaxBullets: 50
-  StartingBullets: 20
+  MagazineSize: 30
+  MaxBullets: 150
+  StartingBullets: 90
   ReloadTime: 2
-  FireRate: 1
-  Deviation: 2
+  FireRate: 5
+  Deviation: 5
   ShotPrefab: {fileID: 6642286391463492555, guid: 50b5a943cfa8e344c979ff6013231bea,
     type: 3}
-  WeaponSlot: 0
+  WeaponSlot: 1

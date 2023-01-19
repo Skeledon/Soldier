@@ -12,6 +12,7 @@ public class WeaponData : ScriptableObject
     public int StartingBullets;
     public float ReloadTime;
     public float FireRate;
+    public float Deviation; //one side in degrees
     public GameObject ShotPrefab;
     public int WeaponSlot;
 }

@@ -8,11 +8,15 @@ public class Shot : MonoBehaviour
     private float Speed;
     [SerializeField]
     private float LifeTime;
+    [SerializeField]
+    private int Damage;
 
     private ShotsPool myPool;
     private Transform t;
     private float currentTime;
     private GameObject owner;
+
+    private bool alive;
 
     private void Awake()
     {
@@ -32,10 +36,26 @@ public class Shot : MonoBehaviour
     {
         owner = own;
         this.myPool = myPool;
+        currentTime = 0;
+        alive = true;
     }
 
     private void DestroySelf()
     {
-        Destroy(gameObject);
+        alive = false;
+        myPool.ShotDestroyed(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Soldier") && collision.gameObject != owner && alive)
+        {
+            collision.GetComponent<Health>().ApplyDamage(Damage);
+            DestroySelf();
+        }
+        if(collision.CompareTag("Wall"))
+        {
+            DestroySelf();
+        }
     }
 }

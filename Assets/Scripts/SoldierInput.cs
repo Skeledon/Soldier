@@ -12,6 +12,9 @@ public class SoldierInput : MonoBehaviour
     [SerializeField]
     private int playerID;
 
+    [SerializeField]
+    private bool relativeMovement = false;
+
     private Rewired.Player myPlayer;
 
     private void Awake()
@@ -33,11 +36,26 @@ public class SoldierInput : MonoBehaviour
 
     private void GetInput()
     {
-        myController.Move(new Vector2(myPlayer.GetAxis("MoveHorizontal"), myPlayer.GetAxis("MoveVertical")));
+        float inputX = myPlayer.GetAxis("MoveHorizontal");
+        float inputY = myPlayer.GetAxis("MoveVertical");
+        myController.Move(new Vector2(inputX, inputY), relativeMovement);
         myController.RotateAimTowards(mainCam.ScreenToWorldPoint(Input.mousePosition));
         if(myPlayer.GetButton("Fire"))
         {
             myController.Shoot();
+        }
+        GetWeaponInputs();
+    }
+
+    private void GetWeaponInputs()
+    {
+        if(myPlayer.GetButtonDown("Weapon0"))
+        {
+            myController.ChangeWeapon(0);
+        }
+        if (myPlayer.GetButtonDown("Weapon1"))
+        {
+            myController.ChangeWeapon(1);
         }
     }
 }

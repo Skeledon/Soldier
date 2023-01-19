@@ -16,7 +16,9 @@ public class SoldierController : MonoBehaviour
     [SerializeField]
     private WeaponManager weaponManager;
 
+
     private Animator legsAnimator;
+    private Animator headAnimator;
 
 
     private Transform t;
@@ -28,12 +30,13 @@ public class SoldierController : MonoBehaviour
     {
         t = transform;
         legsAnimator = legs.GetComponent<Animator>();
-        Spawn();
+        headAnimator = head.GetComponent<Animator>();
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        Spawn();
     }
 
     // Update is called once per frame
@@ -45,10 +48,14 @@ public class SoldierController : MonoBehaviour
     #endregion
 
     #region public methods
-    public void Move(Vector2 dir)
+    public void Move(Vector2 dir, bool relativeMovement)
     {
         if (dir != Vector2.zero)
         {
+            if (relativeMovement)
+            {
+                dir = head.transform.rotation * dir;
+            }
             if (dir.sqrMagnitude > 1)
                 dir.Normalize();
             t.Translate(dir * speed * Time.deltaTime);
@@ -76,6 +83,16 @@ public class SoldierController : MonoBehaviour
     public void Spawn()
     {
         weaponManager.WeaponCollected(0);
+    }
+
+    public void Die()
+    {
+        headAnimator.SetTrigger("Death");
+    }
+
+    public void ChangeWeapon(int index)
+    {
+        weaponManager.ChangeWeapon(index);
     }
     #endregion
 
