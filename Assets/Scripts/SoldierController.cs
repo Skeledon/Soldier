@@ -8,6 +8,9 @@ public class SoldierController : MonoBehaviour
     private float speed;
 
     [SerializeField]
+    private float respawnInvulnerabilityTime;
+
+    [SerializeField]
     private Transform head;
 
     [SerializeField]
@@ -16,12 +19,19 @@ public class SoldierController : MonoBehaviour
     [SerializeField]
     private WeaponManager weaponManager;
 
+    [SerializeField]
+    private AlphaFade fade;
+
+    private enum SoldierState { ALIVE, DEAD, INVULNERABLE }
+    private SoldierState state;
 
     private Animator legsAnimator;
     private Animator headAnimator;
 
 
     private Transform t;
+
+    private Vector2 direction;
 
 
 
@@ -40,9 +50,9 @@ public class SoldierController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        ExecuteMovement();
     }
 
     #endregion
@@ -50,22 +60,11 @@ public class SoldierController : MonoBehaviour
     #region public methods
     public void Move(Vector2 dir, bool relativeMovement)
     {
-        if (dir != Vector2.zero)
+        if (relativeMovement)
         {
-            if (relativeMovement)
-            {
-                dir = head.transform.rotation * dir;
-            }
-            if (dir.sqrMagnitude > 1)
-                dir.Normalize();
-            t.Translate(dir * speed * Time.deltaTime);
-            RotateLegs(dir);
-            legsAnimator.SetBool("isWalking", true);
+            dir = head.transform.rotation * dir;
         }
-        else
-        {
-            legsAnimator.SetBool("isWalking", false);
-        }
+        direction = dir;
     }
 
     public void RotateAimTowards(Vector2 target)
@@ -83,6 +82,9 @@ public class SoldierController : MonoBehaviour
     public void Spawn()
     {
         weaponManager.WeaponCollected(0);
+        state = SoldierState.INVULNERABLE;
+        headAnimator.SetTrigger("Respawn");
+        StartCoroutine(WaitForInvulnerabilityTime());
     }
 
     public void Die()
@@ -94,6 +96,14 @@ public class SoldierController : MonoBehaviour
     {
         weaponManager.ChangeWeapon(index);
     }
+
+    public bool CanTakeDamage()
+    {
+        if (state == SoldierState.ALIVE)
+            return true;
+        return false;
+    }
+
     #endregion
 
     #region private methods
@@ -102,6 +112,33 @@ public class SoldierController : MonoBehaviour
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         legs.rotation = Quaternion.AngleAxis(angle, t.forward);
+    }
+
+    private void ExecuteMovement()
+    {
+        if (direction != Vector2.zero)
+        {
+
+            if (direction.sqrMagnitude > 1)
+                direction.Normalize();
+            t.Translate(direction * speed * Time.deltaTime);
+            RotateLegs(direction);
+            legsAnimator.SetBool("isWalking", true);
+        }
+        else
+        {
+            legsAnimator.SetBool("isWalking", false);
+        }
+    }
+
+    private IEnumerator WaitForInvulnerabilityTime()
+    {
+        fade.enabled = true;
+        fade.StartFading();
+        yield return new WaitForSeconds(respawnInvulnerabilityTime);
+        state = SoldierState.ALIVE;
+        fade.StopFading();
+        fade.enabled = false;
     }
         
     #endregion

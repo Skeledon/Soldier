@@ -26,14 +26,22 @@ public class Health : MonoBehaviour
     }
     public void ApplyDamage(int dmg)
     {
-        CurrentHealth = Mathf.Max(CurrentHealth - dmg, 0);
-        bloodParticle.Emit(30);
-        CheckDead();
+        if (myController.CanTakeDamage())
+        {
+            CurrentHealth = Mathf.Max(CurrentHealth - dmg, 0);
+            bloodParticle.Emit(30);
+            CheckDead();
+        }
     }
 
     public void Heal(int heal)
     {
         CurrentHealth = Mathf.Min(CurrentHealth + heal, MaxHealth);
+    }
+
+    public int GetMaxHealth()
+    {
+        return MaxHealth;
     }
 
     private void CheckDead()

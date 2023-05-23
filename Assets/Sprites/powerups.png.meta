@@ -1,31 +1,7 @@
 fileFormatVersion: 2
 guid: 3157b54bbe0aed94fab3a4359776f7fa
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 3410918491446568398
-    second: powerups_0
-  - first:
-      213: -7415331047110381915
-    second: powerups_1
-  - first:
-      213: 621560852509794982
-    second: powerups_2
-  - first:
-      213: 4928671260392873470
-    second: powerups_3
-  - first:
-      213: 4536303970436761004
-    second: powerups_4
-  - first:
-      213: -499814844998443567
-    second: powerups_5
-  - first:
-      213: -6090384608550177697
-    second: powerups_6
-  - first:
-      213: -4108787663010400821
-    second: powerups_7
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -86,7 +62,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -112,42 +88,6 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
@@ -178,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c8e315cdff546e439f429c6ceef1e91
-      internalID: 3410918491446568398
+      spriteID: 6bee6fa4a6f953b4c8a829c52d7ad868
+      internalID: 2051735290
       vertices: []
       indices: 
       edges: []
@@ -199,8 +139,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ea347697abdeb948a1dbb48e50f418d
-      internalID: -7415331047110381915
+      spriteID: f5929788c55f7b8408466b37f1323bcf
+      internalID: -1134202504
       vertices: []
       indices: 
       edges: []
@@ -220,8 +160,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fac2dcbfa79ebc94892c9ad3fab2e4b3
-      internalID: 621560852509794982
+      spriteID: 1647a7fcfc765a64c996f6dede215a95
+      internalID: 118909059
       vertices: []
       indices: 
       edges: []
@@ -241,8 +181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e649579b34ab5a04895194ab640ea1fd
-      internalID: 4928671260392873470
+      spriteID: 8e6c89b82803bd140ab93c95b8e50923
+      internalID: 239665521
       vertices: []
       indices: 
       edges: []
@@ -262,8 +202,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c9aa71495c777f4196788a83bbe63bc
-      internalID: 4536303970436761004
+      spriteID: b6796e89b44ff1e4fbb4a4435062b428
+      internalID: 1597544298
       vertices: []
       indices: 
       edges: []
@@ -283,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 990fa7a0666b8fc48af86aee8d9591c5
-      internalID: -499814844998443567
+      spriteID: 5dec8a0d176f11947bc3b2a612795188
+      internalID: 269208970
       vertices: []
       indices: 
       edges: []
@@ -304,8 +244,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2966e39c9075f134683c206d80ac549e
-      internalID: -6090384608550177697
+      spriteID: 8b96cb7f5a1e36e418491593837055bc
+      internalID: 1669544640
       vertices: []
       indices: 
       edges: []
@@ -325,8 +265,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1106014f53b7ca45b4b3ab6f4dc5599
-      internalID: -4108787663010400821
+      spriteID: 2c7fe4560b6710346ad7f09724f3d652
+      internalID: -437521226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: powerups_8
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 31
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e21b0f25e6c88834cb97a4cae995bce8
+      internalID: -1243893878
       vertices: []
       indices: 
       edges: []
@@ -334,7 +295,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4f4dd146f7d2bca4baed1f7033b112b3
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -342,14 +303,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      powerups_3: 4928671260392873470
-      powerups_0: 3410918491446568398
-      powerups_4: 4536303970436761004
-      powerups_7: -4108787663010400821
-      powerups_1: -7415331047110381915
-      powerups_5: -499814844998443567
-      powerups_6: -6090384608550177697
-      powerups_2: 621560852509794982
+      powerups_3: 239665521
+      powerups_8: -1243893878
+      powerups_0: 2051735290
+      powerups_4: 1597544298
+      powerups_7: -437521226
+      powerups_1: -1134202504
+      powerups_5: 269208970
+      powerups_6: 1669544640
+      powerups_2: 118909059
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

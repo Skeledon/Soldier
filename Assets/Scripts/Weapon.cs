@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Weapon
 {
+    public int MagazineSize { get; private set; }
+    public int CurrentBulletsInMagazine { get; private set; }
+    public int MaxBullets { get; private set; }
+    public int CurrentBulletsTotal { get; private set; }
+
     private ShotsPool pool;
     private string weaponName;
-    private int magazineSize;
-    private int currentBulletsInMagazine;
-    private int maxBullets;
-    private int currentBulletsTotal;
     private float fireRate;
     private float deviation;
     private GameObject shotPrefab;
@@ -20,13 +21,15 @@ public class Weapon
 
     public float timeBetweenShots { get { return 1 / fireRate; } }
 
+    private bool canFire;
+
     public Weapon(WeaponData data, GameObject shotsFather)
     {
         weaponName = data.Name;
-        magazineSize = data.MagazineSize;
-        currentBulletsInMagazine = magazineSize;
-        maxBullets = data.MaxBullets;
-        currentBulletsTotal = data.StartingBullets;
+        MagazineSize = data.MagazineSize;
+        CurrentBulletsInMagazine = MagazineSize;
+        MaxBullets = data.MaxBullets;
+        CurrentBulletsTotal = data.StartingBullets;
         reloadTime = data.ReloadTime;
         fireRate = data.FireRate;
         shotPrefab = data.ShotPrefab;
@@ -35,15 +38,35 @@ public class Weapon
         this.shotsFather = shotsFather;
 
         pool = new ShotsPool();
-        pool.Init(maxBullets, shotPrefab, shotsFather);
+        pool.Init(MaxBullets, shotPrefab, shotsFather);
+        canFire = true;
     }
 
-    public void Shoot(Vector3 position, Quaternion rotation, GameObject owner)
+    public int Shoot(Vector3 position, Quaternion rotation, GameObject owner)
     {
+        if(CurrentBulletsInMagazine == 0)
+            return 0;
         float rnd = Random.Range(-deviation, deviation);
         Vector3 eulerRotation = rotation.eulerAngles;
         eulerRotation += new Vector3(0, 0, rnd);
         rotation = Quaternion.Euler(eulerRotation);
         pool.ShotFired(position, rotation, owner);
+        UpdateAmmo();
+        return CurrentBulletsInMagazine;
+    }
+
+    private void UpdateAmmo()
+    {
+        CurrentBulletsInMagazine--;
+        if (CurrentBulletsInMagazine == 0)
+        {
+            canFire = false;
+        }
+    }
+    public void Reload()
+    {
+        int ammoToPutInMagazine = Mathf.Min(MagazineSize, CurrentBulletsTotal);
+        CurrentBulletsTotal -= ammoToPutInMagazine;
+        CurrentBulletsInMagazine = ammoToPutInMagazine;
     }
 }

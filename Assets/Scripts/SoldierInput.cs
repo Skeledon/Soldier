@@ -28,8 +28,13 @@ public class SoldierInput : MonoBehaviour
         mainCam = Camera.main;
     }
 
+    private void Update()
+    {
+        GetWeaponInputs();
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         GetInput();
     }
@@ -44,7 +49,6 @@ public class SoldierInput : MonoBehaviour
         {
             myController.Shoot();
         }
-        GetWeaponInputs();
     }
 
     private void GetWeaponInputs()

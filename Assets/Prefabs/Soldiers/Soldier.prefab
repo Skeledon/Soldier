@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 993100661864476924}
   - component: {fileID: 685561256145690993}
   - component: {fileID: 6959453565214652773}
+  - component: {fileID: 7688816198896563386}
   - component: {fileID: 219910245751634492}
   - component: {fileID: 3185132893115784253}
   m_Layer: 0
@@ -53,9 +54,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  respawnInvulnerabilityTime: 3
   head: {fileID: 7324883072381049730}
   legs: {fileID: 7754756719698586605}
   weaponManager: {fileID: 685561256145690993}
+  fade: {fileID: 7688816198896563386}
 --- !u!114 &993100661864476924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +100,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   bloodParticle: {fileID: 5290126295065535819}
+--- !u!114 &7688816198896563386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005856183802069329}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ddc4cca1665a244c831e8319a36d8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAlpha: 0.8
+  minAlpha: 0.4
+  timePeriod: 1
+  renderers:
+  - {fileID: 5384738472418428292}
+  - {fileID: 4607122706572376245}
 --- !u!50 &219910245751634492
 Rigidbody2D:
   serializedVersion: 4
@@ -5179,6 +5200,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5521e49df36106446ad2005debdc3b3d, type: 3}
+--- !u!212 &4607122706572376245 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7935405610670560334, guid: 5521e49df36106446ad2005debdc3b3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5895195328642608379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7754756719698586605 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4202314529419151126, guid: 5521e49df36106446ad2005debdc3b3d,
