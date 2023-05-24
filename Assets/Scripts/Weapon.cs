@@ -7,7 +7,10 @@ public class Weapon
     public int MagazineSize { get; private set; }
     public int CurrentBulletsInMagazine { get; private set; }
     public int MaxBullets { get; private set; }
-    public int CurrentBulletsTotal { get; private set; }
+    public int CurrentBulletsInStock { get; private set; }
+    public AudioClip ShotSound { get; private set; }
+
+    public int CurrentBulletsTotal { get { return CurrentBulletsInStock + CurrentBulletsInMagazine; } }
 
     private ShotsPool pool;
     private string weaponName;
@@ -29,12 +32,13 @@ public class Weapon
         MagazineSize = data.MagazineSize;
         CurrentBulletsInMagazine = MagazineSize;
         MaxBullets = data.MaxBullets;
-        CurrentBulletsTotal = data.StartingBullets;
+        CurrentBulletsInStock = data.StartingBullets;
         reloadTime = data.ReloadTime;
         fireRate = data.FireRate;
         shotPrefab = data.ShotPrefab;
         weaponSlot = data.WeaponSlot;
         deviation = data.Deviation;
+        ShotSound = data.ShotClip;
         this.shotsFather = shotsFather;
 
         pool = new ShotsPool();
@@ -65,8 +69,8 @@ public class Weapon
     }
     public void Reload()
     {
-        int ammoToPutInMagazine = Mathf.Min(MagazineSize, CurrentBulletsTotal);
-        CurrentBulletsTotal -= ammoToPutInMagazine;
-        CurrentBulletsInMagazine = ammoToPutInMagazine;
+        int ammoToPutInMagazine = Mathf.Min(MagazineSize - CurrentBulletsInMagazine, CurrentBulletsInStock);
+        CurrentBulletsInStock -= ammoToPutInMagazine;
+        CurrentBulletsInMagazine += ammoToPutInMagazine;
     }
 }

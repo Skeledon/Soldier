@@ -8,23 +8,41 @@ public class WeaponManager : MonoBehaviour
 
     public float CurrentReloadTime { get; private set; }
 
+    [SerializeField]
+    private bool isPlayerWeaponManager;
+
+    [SerializeField]
+    private AudioSource audioSource;
+
     private GameObject ShotsFather;
     
-    private Weapon[] weaponsHeld = new Weapon[10];
+    private Weapon[] weaponsHeld = new Weapon[4];
     private int currentWeapon = 0;
     private bool canFire = true;
     private Coroutine currentWaitCoroutine;
+
+    //events for playerui
+    public delegate void WeaponChange(int index);
+    public event WeaponChange WeaponChanged;
+
+    public delegate void WeaponReset();
+    public event WeaponReset WeaponResetted;
+
+    public delegate void WeaponCollect(int index);
+    public event WeaponChange WeaponCollected;
 
     private void Awake()
     {
         ShotsFather = GameObject.FindGameObjectWithTag("ShotPool");
         ResetWeapons();
     }
-    public bool WeaponCollected(int slot)
+    public bool CollectWeapon(int slot)
     {
         if (weaponsHeld[slot] != null)
             return false;
         weaponsHeld[slot] = new Weapon(WeaponsData[slot], ShotsFather);
+        if (isPlayerWeaponManager)
+            WeaponCollected.Invoke(slot);
         return true;
     }
 
@@ -33,15 +51,16 @@ public class WeaponManager : MonoBehaviour
         if (canFire)
         {
             int currentAmmo = weaponsHeld[currentWeapon].Shoot(position, rotation, owner);
+            audioSource.PlayOneShot(CurrentWeapon().ShotSound);
             if (currentAmmo > 0)
             {
                 currentWaitCoroutine = StartCoroutine(WaitForNextShot(weaponsHeld[currentWeapon].timeBetweenShots));
             }
             else
             {
-                if (weaponsHeld[currentWeapon].CurrentBulletsTotal != 0)
+                if (weaponsHeld[currentWeapon].CurrentBulletsInStock != 0)
                 {
-                    currentWaitCoroutine = StartCoroutine(WaitForReload(weaponsHeld[currentWeapon].reloadTime));
+                    ReloadWeapon();
                 }
                 else
                 {
@@ -55,11 +74,14 @@ public class WeaponManager : MonoBehaviour
     {
         if (weaponsHeld[slot] == null)
             return;
+        if (isPlayerWeaponManager)
+            WeaponChanged.Invoke(slot);
         currentWeapon = slot;
-        StopCoroutine(currentWaitCoroutine);
+        if(currentWaitCoroutine != null)
+            StopCoroutine(currentWaitCoroutine);
         CurrentReloadTime = 0f;
         canFire = true;
-        if (weaponsHeld[slot].CurrentBulletsInMagazine == 0 && weaponsHeld[slot].CurrentBulletsTotal != 0)
+        if (weaponsHeld[slot].CurrentBulletsInMagazine == 0 && weaponsHeld[slot].CurrentBulletsInStock != 0)
         {
             currentWaitCoroutine = StartCoroutine(WaitForReload(weaponsHeld[currentWeapon].reloadTime));
         }
@@ -70,6 +92,18 @@ public class WeaponManager : MonoBehaviour
         for(int i = 0; i < weaponsHeld.Length; i++)
         {
             weaponsHeld[i] = null;
+        }
+        if (isPlayerWeaponManager)
+            WeaponResetted.Invoke();
+    }
+
+    public void ReloadWeapon()
+    {
+        if (weaponsHeld[currentWeapon].CurrentBulletsInMagazine == weaponsHeld[currentWeapon].MagazineSize || weaponsHeld[currentWeapon].CurrentBulletsInStock == 0)
+            return;
+        if (CurrentReloadTime == 0f)
+        {
+            currentWaitCoroutine = StartCoroutine(WaitForReload(weaponsHeld[currentWeapon].reloadTime));
         }
     }
 
@@ -97,5 +131,11 @@ public class WeaponManager : MonoBehaviour
     public Weapon CurrentWeapon()
     {
         return weaponsHeld[currentWeapon];
+    }
+
+    public Weapon[] AllWeaponsHeld()
+    {
+        Weapon[] w = (Weapon[])weaponsHeld.Clone();
+        return w;
     }
 }

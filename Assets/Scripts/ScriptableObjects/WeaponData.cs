@@ -14,5 +14,6 @@ public class WeaponData : ScriptableObject
     public float FireRate;
     public float Deviation; //one side in degrees
     public GameObject ShotPrefab;
+    public AudioClip ShotClip;
     public int WeaponSlot;
 }

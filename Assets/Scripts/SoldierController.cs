@@ -49,6 +49,11 @@ public class SoldierController : MonoBehaviour
         Spawn();
     }
 
+    private void Update()
+    {
+
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -81,7 +86,8 @@ public class SoldierController : MonoBehaviour
 
     public void Spawn()
     {
-        weaponManager.WeaponCollected(0);
+        weaponManager.CollectWeapon(0);
+        weaponManager.ChangeWeapon(0);
         state = SoldierState.INVULNERABLE;
         headAnimator.SetTrigger("Respawn");
         StartCoroutine(WaitForInvulnerabilityTime());
@@ -89,12 +95,19 @@ public class SoldierController : MonoBehaviour
 
     public void Die()
     {
+        headAnimator.ResetTrigger("Respawn");
         headAnimator.SetTrigger("Death");
+        state = SoldierState.DEAD;
     }
 
     public void ChangeWeapon(int index)
     {
         weaponManager.ChangeWeapon(index);
+    }
+
+    public void ReloadWeapon()
+    {
+        weaponManager.ReloadWeapon();
     }
 
     public bool CanTakeDamage()

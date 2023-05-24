@@ -61,5 +61,9 @@ public class SoldierInput : MonoBehaviour
         {
             myController.ChangeWeapon(1);
         }
+        if(myPlayer.GetButtonDown("Reload"))
+        {
+            myController.ReloadWeapon();
+        }
     }
 }

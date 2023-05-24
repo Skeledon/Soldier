@@ -10,7 +10,7 @@ public class WeaponPickup : MonoBehaviour
     {
         if(collision.CompareTag("Soldier"))
         {
-            if (collision.GetComponent<WeaponManager>().WeaponCollected(WeaponSlot))
+            if (collision.GetComponent<WeaponManager>().CollectWeapon(WeaponSlot))
                 DestroySelf();
         }
     }

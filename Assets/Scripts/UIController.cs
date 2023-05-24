@@ -13,6 +13,9 @@ public class UIController : MonoBehaviour
     private Image armorBar;
 
     [SerializeField]
+    private Gradient healthBarColor;
+
+    [SerializeField]
     private TextMeshProUGUI ammoAmount;
 
     [SerializeField]
@@ -36,6 +39,13 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private WeaponManager weaponManager;
 
+    private void Awake()
+    {
+        weaponManager.WeaponChanged += WeaponChanged;
+        weaponManager.WeaponCollected += WeaponCollected;
+        weaponManager.WeaponResetted += ResetWeponsSlots;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +55,13 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ReadAmmoAmount();
+        ReadCurrentWeaponAmmoAmount();
+        ReadTotalAmmo();
         ShowReload();
+        ShowHealth();
     }
 
-    private void SetAmmoAmount(int magazine, int total)
+    private void SetCurrentWeaponAmmoAmount(int magazine, int total)
     {
         ammoAmount.text = magazine + "/" + total;
         if (magazine + total == 0)
@@ -58,11 +70,22 @@ public class UIController : MonoBehaviour
             ammoAmount.color = standardColor;
     }
 
-    private void ReadAmmoAmount()
+    private void ReadCurrentWeaponAmmoAmount()
     {
         int magazine = weaponManager.CurrentWeapon().CurrentBulletsInMagazine;
-        int total = weaponManager.CurrentWeapon().CurrentBulletsTotal;
-        SetAmmoAmount(magazine, total);
+        int total = weaponManager.CurrentWeapon().CurrentBulletsInStock;
+        SetCurrentWeaponAmmoAmount(magazine, total);
+    }
+
+    private void ReadTotalAmmo()
+    {
+        foreach(Weapon w in weaponManager.AllWeaponsHeld())
+        {
+            if(w == null)
+                continue;
+            int ammo = w.CurrentBulletsTotal;
+            weaponsSlots[w.weaponSlot].SetAmmo(ammo);
+        }
     }
 
     private void ShowReload()
@@ -72,4 +95,35 @@ public class UIController : MonoBehaviour
         float coeff = currentTime / maxTime;
         reloadIndicator.fillAmount = coeff;
     }
+
+    private void ShowHealth()
+    {
+        float hpBarCoeff = (float)soldierHealth.CurrentHealth / soldierHealth.GetMaxHealth();
+        hpBar.fillAmount = hpBarCoeff;
+        hpBar.color = healthBarColor.Evaluate(hpBarCoeff);
+        armorBar.fillAmount = (float)soldierHealth.CurrentArmor / soldierHealth.GetMaxArmor();
+    }
+
+    private void ResetWeponsSlots()
+    {
+        foreach(UIWeaponSlot slot in weaponsSlots)
+        {
+            slot.Show(false);
+        }
+    }
+
+    private void WeaponChanged(int index)
+    {
+        foreach (UIWeaponSlot slot in weaponsSlots)
+        {
+            slot.Highlight(false);
+        }
+        weaponsSlots[index].Highlight(true);
+    }
+
+    private void WeaponCollected(int index)
+    {
+        weaponsSlots[index].Show(true);
+    }
+
 }

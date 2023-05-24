@@ -19,6 +19,7 @@ MonoBehaviour:
   ReloadTime: 2
   FireRate: 1
   Deviation: 2
-  ShotPrefab: {fileID: 6642286391463492555, guid: 50b5a943cfa8e344c979ff6013231bea,
+  ShotPrefab: {fileID: 6044934871928907898, guid: e679d82109458d241aef22672c008761,
     type: 3}
+  ShotClip: {fileID: 8300000, guid: 95849a02bad5baf4d8b4f874b8ca801c, type: 3}
   WeaponSlot: 0
