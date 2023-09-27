@@ -15,11 +15,28 @@ public class WeaponManager : MonoBehaviour
     private AudioSource audioSource;
 
     private GameObject ShotsFather;
-    
+
     private Weapon[] weaponsHeld = new Weapon[4];
     private int currentWeapon = 0;
     private bool canFire = true;
     private Coroutine currentWaitCoroutine;
+
+    public Weapon CurrentWeapon
+    {
+        get
+        {
+            return weaponsHeld[currentWeapon];
+        }
+    }
+
+    public Weapon[] AllWeaponsHeld
+    {
+        get
+        {
+            Weapon[] w = (Weapon[])weaponsHeld.Clone();
+            return w;
+        }
+    }
 
     //events for playerui
     public delegate void WeaponChange(int index);
@@ -34,7 +51,6 @@ public class WeaponManager : MonoBehaviour
     private void Awake()
     {
         ShotsFather = GameObject.FindGameObjectWithTag("ShotPool");
-        ResetWeapons();
     }
     public bool CollectWeapon(int slot)
     {
@@ -51,7 +67,7 @@ public class WeaponManager : MonoBehaviour
         if (canFire)
         {
             int currentAmmo = weaponsHeld[currentWeapon].Shoot(position, rotation, owner);
-            audioSource.PlayOneShot(CurrentWeapon().ShotSound);
+            audioSource.PlayOneShot(CurrentWeapon.ShotSound);
             if (currentAmmo > 0)
             {
                 currentWaitCoroutine = StartCoroutine(WaitForNextShot(weaponsHeld[currentWeapon].timeBetweenShots));
@@ -128,14 +144,5 @@ public class WeaponManager : MonoBehaviour
         weaponsHeld[currentWeapon].Reload();
     }
 
-    public Weapon CurrentWeapon()
-    {
-        return weaponsHeld[currentWeapon];
-    }
 
-    public Weapon[] AllWeaponsHeld()
-    {
-        Weapon[] w = (Weapon[])weaponsHeld.Clone();
-        return w;
-    }
 }

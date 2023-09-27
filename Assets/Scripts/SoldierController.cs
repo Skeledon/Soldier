@@ -46,7 +46,7 @@ public class SoldierController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Spawn();
+        //Spawn();
     }
 
     private void Update()
@@ -86,6 +86,7 @@ public class SoldierController : MonoBehaviour
 
     public void Spawn()
     {
+        weaponManager.ResetWeapons();
         weaponManager.CollectWeapon(0);
         weaponManager.ChangeWeapon(0);
         state = SoldierState.INVULNERABLE;

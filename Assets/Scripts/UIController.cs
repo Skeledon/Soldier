@@ -39,11 +39,11 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private WeaponManager weaponManager;
 
+    private bool uiInitialized = false;
+
     private void Awake()
     {
-        weaponManager.WeaponChanged += WeaponChanged;
-        weaponManager.WeaponCollected += WeaponCollected;
-        weaponManager.WeaponResetted += ResetWeponsSlots;
+
     }
 
     // Start is called before the first frame update
@@ -55,10 +55,27 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ReadCurrentWeaponAmmoAmount();
-        ReadTotalAmmo();
-        ShowReload();
-        ShowHealth();
+        if (uiInitialized)
+        {
+
+            ReadCurrentWeaponAmmoAmount();
+            ReadTotalAmmo();
+            ShowReload();
+            ShowHealth();
+        }
+    }
+
+    public void InitializeUILinks(GameObject playerGo)
+    {
+        soldierController = playerGo.GetComponent<SoldierController>();
+        soldierHealth = playerGo.GetComponent<Health>();
+        weaponManager = playerGo.GetComponent<WeaponManager>();
+
+        weaponManager.WeaponChanged += WeaponChanged;
+        weaponManager.WeaponCollected += WeaponCollected;
+        weaponManager.WeaponResetted += ResetWeponsSlots;
+
+        uiInitialized = true;
     }
 
     private void SetCurrentWeaponAmmoAmount(int magazine, int total)
@@ -72,14 +89,14 @@ public class UIController : MonoBehaviour
 
     private void ReadCurrentWeaponAmmoAmount()
     {
-        int magazine = weaponManager.CurrentWeapon().CurrentBulletsInMagazine;
-        int total = weaponManager.CurrentWeapon().CurrentBulletsInStock;
+        int magazine = weaponManager.CurrentWeapon.CurrentBulletsInMagazine;
+        int total = weaponManager.CurrentWeapon.CurrentBulletsInStock;
         SetCurrentWeaponAmmoAmount(magazine, total);
     }
 
     private void ReadTotalAmmo()
     {
-        foreach(Weapon w in weaponManager.AllWeaponsHeld())
+        foreach(Weapon w in weaponManager.AllWeaponsHeld)
         {
             if(w == null)
                 continue;
@@ -91,7 +108,7 @@ public class UIController : MonoBehaviour
     private void ShowReload()
     {
         float currentTime = weaponManager.CurrentReloadTime;
-        float maxTime = weaponManager.CurrentWeapon().reloadTime;
+        float maxTime = weaponManager.CurrentWeapon.reloadTime;
         float coeff = currentTime / maxTime;
         reloadIndicator.fillAmount = coeff;
     }

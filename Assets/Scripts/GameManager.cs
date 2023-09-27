@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+    [SerializeField]
+    LevelStartupData startupData;
+
+    private int targetScore;
+    public int RedScore { get; private set; }
+    public int BlueScore { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,4 +22,26 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    private void IncreaseRedScore(int amount)
+    {
+        RedScore += amount;
+    }
+
+    private void IncreaseRedScore()
+    {
+        IncreaseRedScore(1);
+    }
+
+    private void IncreaseBlueScore(int amount)
+    {
+        BlueScore += amount;
+    }
+
+    private void IncreaseBlueScore()
+    {
+        IncreaseBlueScore(1);
+    }
+
+
 }
