@@ -26,6 +26,9 @@ public class Weapon
 
     private bool canFire;
 
+    public bool HasInfiniteMaxBullets { get { return MaxBullets < 0; } }
+    public bool HasInfiniteMagazineBullets { get { return MagazineSize < 0; } }
+
     public Weapon(WeaponData data, GameObject shotsFather)
     {
         weaponName = data.Name;
@@ -69,8 +72,16 @@ public class Weapon
     }
     public void Reload()
     {
-        int ammoToPutInMagazine = Mathf.Min(MagazineSize - CurrentBulletsInMagazine, CurrentBulletsInStock);
-        CurrentBulletsInStock -= ammoToPutInMagazine;
+        int ammoToPutInMagazine;
+        if (!HasInfiniteMaxBullets)
+        {
+            ammoToPutInMagazine = Mathf.Min(MagazineSize - CurrentBulletsInMagazine, CurrentBulletsInStock);
+            CurrentBulletsInStock -= ammoToPutInMagazine;
+        }
+        else
+        {
+            ammoToPutInMagazine = MagazineSize;
+        }
         CurrentBulletsInMagazine += ammoToPutInMagazine;
     }
 }

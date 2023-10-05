@@ -68,7 +68,7 @@ public class WeaponManager : MonoBehaviour
         {
             int currentAmmo = weaponsHeld[currentWeapon].Shoot(position, rotation, owner);
             audioSource.PlayOneShot(CurrentWeapon.ShotSound);
-            if (currentAmmo > 0)
+            if (currentAmmo > 0 || weaponsHeld[currentWeapon].HasInfiniteMagazineBullets)
             {
                 currentWaitCoroutine = StartCoroutine(WaitForNextShot(weaponsHeld[currentWeapon].timeBetweenShots));
             }
@@ -97,10 +97,14 @@ public class WeaponManager : MonoBehaviour
             StopCoroutine(currentWaitCoroutine);
         CurrentReloadTime = 0f;
         canFire = true;
-        if (weaponsHeld[slot].CurrentBulletsInMagazine == 0 && weaponsHeld[slot].CurrentBulletsInStock != 0)
+        if (weaponsHeld[slot].CurrentBulletsInMagazine == 0)
         {
-            currentWaitCoroutine = StartCoroutine(WaitForReload(weaponsHeld[currentWeapon].reloadTime));
+            if(weaponsHeld[slot].CurrentBulletsInStock != 0)
+                currentWaitCoroutine = StartCoroutine(WaitForReload(weaponsHeld[currentWeapon].reloadTime));
+            else
+                canFire = false;
         }
+
     }
 
     public void ResetWeapons()

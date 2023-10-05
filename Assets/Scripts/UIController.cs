@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -78,9 +78,29 @@ public class UIController : MonoBehaviour
         uiInitialized = true;
     }
 
-    private void SetCurrentWeaponAmmoAmount(int magazine, int total)
+    private void SetCurrentWeaponAmmoAmount(int magazine, int total, bool infiniteMagazine, bool infiniteStock)
     {
-        ammoAmount.text = magazine + "/" + total;
+        string magazineAmount;
+        string totalAmount;
+        if(infiniteMagazine)
+        {
+            magazineAmount = "∞";
+        }
+        else
+        {
+            magazineAmount = magazine.ToString();
+        }
+
+        if (infiniteStock)
+        {
+            totalAmount = "∞";
+        }
+        else
+        {
+            totalAmount = total.ToString();
+        }
+
+        ammoAmount.text = magazineAmount + "/" + totalAmount;
         if (magazine + total == 0)
             ammoAmount.color = outOfAmmoColor;
         else
@@ -91,7 +111,9 @@ public class UIController : MonoBehaviour
     {
         int magazine = weaponManager.CurrentWeapon.CurrentBulletsInMagazine;
         int total = weaponManager.CurrentWeapon.CurrentBulletsInStock;
-        SetCurrentWeaponAmmoAmount(magazine, total);
+        bool infiniteMagazine = weaponManager.CurrentWeapon.HasInfiniteMagazineBullets;
+        bool infiniteStock = weaponManager.CurrentWeapon.HasInfiniteMaxBullets;
+        SetCurrentWeaponAmmoAmount(magazine, total, infiniteMagazine, infiniteStock);
     }
 
     private void ReadTotalAmmo()
@@ -140,7 +162,9 @@ public class UIController : MonoBehaviour
 
     private void WeaponCollected(int index)
     {
+        weaponsSlots[index].SetInfiniteAmmo(weaponManager.AllWeaponsHeld[index].HasInfiniteMaxBullets);
         weaponsSlots[index].Show(true);
+
     }
 
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SoldierController))]
+[RequireComponent(typeof(PawnController))]
 public class Health : MonoBehaviour
 {
     [SerializeField]
@@ -26,13 +26,21 @@ public class Health : MonoBehaviour
     [SerializeField]
     private AudioClip deathSound;
 
+    [SerializeField]
+    private GameObject hpBarPrefab;
+
+    [SerializeField]
+    private Vector3 hpBarOffset;
+
+    private HpBar myHpBar;
+
     public int CurrentHealth { get; private set; }
     public int CurrentArmor { get; private set; }
 
-    private SoldierController myController;
+    private PawnController myController;
     private void Awake()
     {
-        myController = GetComponent<SoldierController>();
+        myController = GetComponent<PawnController>();
         Init();
     }
 
@@ -40,6 +48,8 @@ public class Health : MonoBehaviour
     {
         CurrentHealth = maxHealth;
         CurrentArmor = maxArmor;
+        myHpBar = GameObject.Instantiate(hpBarPrefab, transform.position + hpBarOffset, Quaternion.identity, transform).GetComponent<HpBar>();
+        myHpBar.SetHPCoeff((float)CurrentHealth / maxHealth);
     }
     public void ApplyDamage(int dmg)
     {
@@ -53,6 +63,7 @@ public class Health : MonoBehaviour
             CurrentArmor = Mathf.Max(CurrentArmor - armorDmg, 0);
             bloodParticle.Emit(30);
             audioSource.PlayOneShot(damageSound);
+            myHpBar.SetHPCoeff((float)CurrentHealth / maxHealth);
             CheckDead();
         }
     }
@@ -60,6 +71,7 @@ public class Health : MonoBehaviour
     public void Heal(int heal)
     {
         CurrentHealth = Mathf.Min(CurrentHealth + heal, maxHealth);
+        myHpBar.SetHPCoeff((float)CurrentHealth / maxHealth);
     }
 
     public int GetMaxHealth()

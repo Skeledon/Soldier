@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +18,7 @@ public class UIWeaponSlot : MonoBehaviour
 
 
     private int ammoAmount;
+    private bool infiniteAmmo;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +51,25 @@ public class UIWeaponSlot : MonoBehaviour
 
     public void SetAmmo(int amount)
     {
-        ammoAmount = amount;
-        ammoText.text = ammoAmount.ToString();
+
+        if(infiniteAmmo)
+        {
+            ammoText.text = "∞";
+        }
+        else
+        {
+            ammoAmount = amount;
+            ammoText.text = ammoAmount.ToString();
+        }
+    }
+
+    public void SetInfiniteAmmo()
+    {
+        SetInfiniteAmmo(true);
+    }
+
+    public void SetInfiniteAmmo(bool b)
+    {
+        infiniteAmmo = b;
     }
 }

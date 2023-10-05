@@ -56,9 +56,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   respawnInvulnerabilityTime: 3
+  weaponManager: {fileID: 685561256145690993}
   head: {fileID: 7324883072381049730}
   legs: {fileID: 7754756719698586605}
-  weaponManager: {fileID: 685561256145690993}
   fade: {fileID: 7688816198896563386}
 --- !u!114 &993100661864476924
 MonoBehaviour:
@@ -131,6 +131,9 @@ MonoBehaviour:
   audioSource: {fileID: 4400583297029543199}
   damageSound: {fileID: 8300000, guid: 3e571da19e9ea5b4d8631a17b182c682, type: 3}
   deathSound: {fileID: 8300000, guid: 6d61fd628c10a4b43a500af839db9247, type: 3}
+  hpBarPrefab: {fileID: 7995512235181149071, guid: 3d77c1a04de09e24bbf2adc7df0d8c91,
+    type: 3}
+  hpBarOffset: {x: 0, y: 1, z: 0}
 --- !u!114 &7688816198896563386
 MonoBehaviour:
   m_ObjectHideFlags: 0

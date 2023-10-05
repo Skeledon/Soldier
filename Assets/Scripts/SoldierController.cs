@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierController : MonoBehaviour
+public class SoldierController : PawnController
 {
-    [SerializeField]
-    private float speed;
-
-    [SerializeField]
-    private float respawnInvulnerabilityTime;
-
     [SerializeField]
     private Transform head;
 
@@ -17,28 +11,19 @@ public class SoldierController : MonoBehaviour
     private Transform legs;
 
     [SerializeField]
-    private WeaponManager weaponManager;
-
-    [SerializeField]
     private AlphaFade fade;
 
-    private enum SoldierState { ALIVE, DEAD, INVULNERABLE }
-    private SoldierState state;
+
 
     private Animator legsAnimator;
     private Animator headAnimator;
 
 
-    private Transform t;
-
-    private Vector2 direction;
-
-
 
     #region Unity Methods
-    private void Awake()
+    protected override void Awake()
     {
-        t = transform;
+        base.Awake();
         legsAnimator = legs.GetComponent<Animator>();
         headAnimator = head.GetComponent<Animator>();
 
@@ -79,44 +64,29 @@ public class SoldierController : MonoBehaviour
         head.rotation = Quaternion.AngleAxis(angle, t.forward);
     }
 
-    public void Shoot()
+    public override void Shoot()
     {
         weaponManager.Shoot(head.position, head.rotation, gameObject);
     }
 
-    public void Spawn()
+    public override void Spawn()
     {
         weaponManager.ResetWeapons();
         weaponManager.CollectWeapon(0);
         weaponManager.ChangeWeapon(0);
-        state = SoldierState.INVULNERABLE;
+        state = CharacterState.INVULNERABLE;
         headAnimator.SetTrigger("Respawn");
         StartCoroutine(WaitForInvulnerabilityTime());
     }
 
-    public void Die()
+    public override void Die()
     {
         headAnimator.ResetTrigger("Respawn");
         headAnimator.SetTrigger("Death");
-        state = SoldierState.DEAD;
+        state = CharacterState.DEAD;
     }
 
-    public void ChangeWeapon(int index)
-    {
-        weaponManager.ChangeWeapon(index);
-    }
 
-    public void ReloadWeapon()
-    {
-        weaponManager.ReloadWeapon();
-    }
-
-    public bool CanTakeDamage()
-    {
-        if (state == SoldierState.ALIVE)
-            return true;
-        return false;
-    }
 
     #endregion
 
@@ -150,7 +120,7 @@ public class SoldierController : MonoBehaviour
         fade.enabled = true;
         fade.StartFading();
         yield return new WaitForSeconds(respawnInvulnerabilityTime);
-        state = SoldierState.ALIVE;
+        state = CharacterState.ALIVE;
         fade.StopFading();
         fade.enabled = false;
     }

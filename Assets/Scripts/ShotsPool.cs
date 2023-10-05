@@ -19,6 +19,7 @@ public class ShotsPool
         shotPrefab = sPrefab;
         this.shotsFather = shotsFather;
         AddShotsToPool(startingShots);
+        CheckMinimumShotCount();
     }
 
     public void ShotFired(Vector3 position, Quaternion rotation, GameObject owner)

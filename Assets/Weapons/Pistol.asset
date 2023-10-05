@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Pistol
   MagazineSize: 10
-  MaxBullets: 50
+  MaxBullets: -1
   StartingBullets: 3
   ReloadTime: 2
   FireRate: 1
