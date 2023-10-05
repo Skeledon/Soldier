@@ -16,4 +16,5 @@ public class WeaponData : ScriptableObject
     public GameObject ShotPrefab;
     public AudioClip ShotClip;
     public int WeaponSlot;
+    public Sprite WeaponSprite;
 }

@@ -963,6 +963,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 1186221750530763940, guid: 5917e65d86d04664a9555a1a78d7c00a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3560603464367624293, guid: 5917e65d86d04664a9555a1a78d7c00a,
         type: 3}
       propertyPath: m_RootOrder

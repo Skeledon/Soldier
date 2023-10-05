@@ -45,8 +45,8 @@ public class WeaponManager : MonoBehaviour
     public delegate void WeaponReset();
     public event WeaponReset WeaponResetted;
 
-    public delegate void WeaponCollect(int index);
-    public event WeaponChange WeaponCollected;
+    public delegate void WeaponCollect(Weapon w);
+    public event WeaponCollect WeaponCollected;
 
     private void Awake()
     {
@@ -58,7 +58,7 @@ public class WeaponManager : MonoBehaviour
             return false;
         weaponsHeld[slot] = new Weapon(WeaponsData[slot], ShotsFather);
         if (isPlayerWeaponManager)
-            WeaponCollected.Invoke(slot);
+            WeaponCollected.Invoke(weaponsHeld[slot]);
         return true;
     }
 

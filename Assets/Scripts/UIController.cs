@@ -160,10 +160,12 @@ public class UIController : MonoBehaviour
         weaponsSlots[index].Highlight(true);
     }
 
-    private void WeaponCollected(int index)
+    private void WeaponCollected(Weapon w)
     {
-        weaponsSlots[index].SetInfiniteAmmo(weaponManager.AllWeaponsHeld[index].HasInfiniteMaxBullets);
-        weaponsSlots[index].Show(true);
+        weaponsSlots[w.weaponSlot].SetInfiniteAmmo(w.HasInfiniteMaxBullets);
+        weaponsSlots[w.weaponSlot].SetImage(w.Sprite);
+        weaponsSlots[w.weaponSlot].Show(true);
+
 
     }
 

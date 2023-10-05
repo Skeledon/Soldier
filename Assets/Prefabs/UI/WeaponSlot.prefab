@@ -185,7 +185,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 43.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 36.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -491,4 +491,5 @@ MonoBehaviour:
   canvasGroup: {fileID: 4853564900785494270}
   mainVisualObject: {fileID: 1563357502055108751}
   ammoText: {fileID: 5001821325878142297}
+  weaponImage: {fileID: 8647670272234955949}
   alphaValues: {x: 0.25, y: 1}

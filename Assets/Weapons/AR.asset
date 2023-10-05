@@ -23,3 +23,4 @@ MonoBehaviour:
     type: 3}
   ShotClip: {fileID: 8300000, guid: 95849a02bad5baf4d8b4f874b8ca801c, type: 3}
   WeaponSlot: 1
+  WeaponSprite: {fileID: 269208970, guid: 3157b54bbe0aed94fab3a4359776f7fa, type: 3}

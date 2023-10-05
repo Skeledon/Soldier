@@ -10,6 +10,8 @@ public class Weapon
     public int CurrentBulletsInStock { get; private set; }
     public AudioClip ShotSound { get; private set; }
 
+    public Sprite Sprite { get; private set; }
+
     public int CurrentBulletsTotal { get { return CurrentBulletsInStock + CurrentBulletsInMagazine; } }
 
     private ShotsPool pool;
@@ -42,6 +44,7 @@ public class Weapon
         weaponSlot = data.WeaponSlot;
         deviation = data.Deviation;
         ShotSound = data.ShotClip;
+        Sprite = data.WeaponSprite;
         this.shotsFather = shotsFather;
 
         pool = new ShotsPool();

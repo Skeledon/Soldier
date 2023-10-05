@@ -14,6 +14,9 @@ public class UIWeaponSlot : MonoBehaviour
     TMPro.TextMeshProUGUI ammoText;
 
     [SerializeField]
+    UnityEngine.UI.Image weaponImage;
+
+    [SerializeField]
     Vector2 alphaValues;
 
 
@@ -71,5 +74,10 @@ public class UIWeaponSlot : MonoBehaviour
     public void SetInfiniteAmmo(bool b)
     {
         infiniteAmmo = b;
+    }
+
+    public void SetImage(Sprite s)
+    {
+        weaponImage.sprite = s;
     }
 }
