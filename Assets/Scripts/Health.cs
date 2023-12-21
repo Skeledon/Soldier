@@ -12,10 +12,10 @@ public class Health : MonoBehaviour
     private int maxArmor;
 
     [SerializeField]
-    private AnimationCurve armorBehaviour;
+    private ParticleSystem bloodParticle;
 
     [SerializeField]
-    private ParticleSystem bloodParticle;
+    private int numberOfBloodParticles = 30;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -55,16 +55,27 @@ public class Health : MonoBehaviour
     {
         if (myController.CanTakeDamage())
         {
-            float coeff = CurrentArmor / maxArmor;
-            float splitDmg = armorBehaviour.Evaluate(coeff);
-            int armorDmg = Mathf.FloorToInt(dmg * splitDmg);
-            int healthDmg = Mathf.FloorToInt(dmg * (1 - splitDmg));
+            float splitDmg = 0;
+            int healthDmg;
+            if (CurrentArmor == 0)
+            {
+                healthDmg = dmg; // if there is no armor all dmg goes directly to the health
+            }
+            else
+            {
+                float coeff = (float)CurrentArmor / maxArmor;
+                splitDmg = (Mathf.Atan(6 * (coeff - .5f)) / Mathf.PI) * .3f + .62f; //calculated parametrically
+                int armorDmg = Mathf.FloorToInt(dmg * splitDmg);
+                int armorPassThroughDmg = Mathf.Clamp(armorDmg - CurrentArmor, 0, dmg); // damage that can't be absorbed by armor passes through to health
+                healthDmg = Mathf.FloorToInt(dmg * (1 - splitDmg)) + armorPassThroughDmg;
+                CurrentArmor = Mathf.Max(CurrentArmor - armorDmg, 0);
+            }
             CurrentHealth = Mathf.Max(CurrentHealth - healthDmg, 0);
-            CurrentArmor = Mathf.Max(CurrentArmor - armorDmg, 0);
-            bloodParticle.Emit(30);
+            bloodParticle.Emit(numberOfBloodParticles);
             audioSource.PlayOneShot(damageSound);
             myHpBar.SetHPCoeff((float)CurrentHealth / maxHealth);
             CheckDead();
+            Debug.Log("health: " + CurrentHealth + " armor: " + CurrentArmor + " split: " + splitDmg);
         }
     }
 

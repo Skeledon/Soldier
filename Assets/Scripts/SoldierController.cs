@@ -105,7 +105,7 @@ public class SoldierController : PawnController
 
             if (direction.sqrMagnitude > 1)
                 direction.Normalize();
-            t.Translate(direction * speed * Time.deltaTime);
+            t.Translate(direction * speed * Time.fixedDeltaTime);
             RotateLegs(direction);
             legsAnimator.SetBool("isWalking", true);
         }
